@@ -1,0 +1,6 @@
+<svg width="1200" height="900" viewBox="0 0 1200 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="900" fill="#F7F5F1"/>
+  <rect x="96" y="96" width="1008" height="708" rx="48" fill="#FFFFFF" stroke="#E8E2D8"/>
+  <text x="120" y="190" font-family="Inter, system-ui, -apple-system" font-size="44" fill="#111827">Lux Nalvage</text>
+  <text x="120" y="250" font-family="Inter, system-ui, -apple-system" font-size="20" fill="#6B7280">Premium placeholder</text>
+</svg>
