@@ -1,0 +1,78 @@
+{% liquid
+  assign faqs_raw = section.settings.faqs | newline_to_br | split: '<br />'
+%}
+<section class="page-shell page-shell--light" data-faq-root {{ section.shopify_attributes }}>
+  <div class="container--narrow">
+    <div style="text-align:center;max-width:760px;margin:0 auto 40px;">
+      <h1 class="heading-lg">Centro de Ayuda</h1>
+      <p class="text-muted" style="margin-top:14px;">Encuentra respuestas a las preguntas más comunes o contacta a nuestro equipo de soporte.</p>
+    </div>
+
+    <div class="faq-search">
+      <span class="faq-search__icon">{% render 'icon', icon: 'search' %}</span>
+      <input class="faq-search__input" type="search" placeholder="Buscar respuestas..." data-faq-search>
+    </div>
+
+    <div class="grid-4" style="margin-top:24px;">
+      {% assign categories = 'Envíos|Devoluciones|Pagos|Pedidos|Seguridad' | split: '|' %}
+      {% for category in categories %}
+        <button type="button" class="faq-category" data-faq-category-button="{{ category }}">
+          <span class="value-grid__icon" style="margin:0 auto 12px;">
+            {% case category %}
+              {% when 'Envíos' %}{% render 'icon', icon: 'truck' %}
+              {% when 'Devoluciones' %}{% render 'icon', icon: 'rotate' %}
+              {% when 'Pagos' %}{% render 'icon', icon: 'credit-card' %}
+              {% when 'Pedidos' %}{% render 'icon', icon: 'package' %}
+              {% else %}{% render 'icon', icon: 'shield' %}
+            {% endcase %}
+          </span>
+          <span style="font-weight:700;">{{ category }}</span>
+        </button>
+      {% endfor %}
+    </div>
+
+    <div class="faq-list" style="margin-top:28px;">
+      {% for faq in faqs_raw %}
+        {% assign parts = faq | split: '||' %}
+        {% if parts.size >= 3 %}
+          <div class="accordion-item" data-accordion data-faq-item data-category="{{ parts[0] | strip }}" data-question="{{ parts[1] | strip | escape }}" data-answer="{{ parts[2] | strip | escape }}">
+            <button type="button" class="accordion-trigger" data-accordion-trigger>
+              <span style="font-weight:600;">{{ parts[1] | strip }}</span>
+              <span class="accordion-icon">{% render 'icon', icon: 'chevron-down' %}</span>
+            </button>
+            <div class="accordion-content">
+              <p>{{ parts[2] | strip }}</p>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+      <div class="article-card hidden" data-faq-empty style="text-align:center;">
+        <p class="text-muted">No encontramos resultados para tu búsqueda.</p>
+        <a href="/pages/contact" class="text-link" style="font-weight:700;">Contacta a nuestro equipo de soporte →</a>
+      </div>
+    </div>
+
+    <div class="cta-band" style="margin-top:32px;text-align:center;">
+      <h2 class="heading-sm">¿No encontraste lo que buscabas?</h2>
+      <p style="margin-top:10px;">Nuestro equipo de soporte está listo para ayudarte con cualquier duda adicional.</p>
+      <div class="cta-actions" style="justify-content:center;">
+        <a class="button button--secondary" style="color:#fff;border-color:rgba(255,255,255,0.4);" href="/pages/contact">Enviar mensaje</a>
+        <a class="button button--light" href="{{ settings.contact_whatsapp }}" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Help page",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "faqs",
+      "label": "FAQs (una por línea: categoría||pregunta||respuesta)",
+      "default": "Envíos||¿Cuánto tarda en llegar mi pedido?||Los envíos dentro de Colombia tardan entre 3-5 días hábiles.\nEnvíos||¿Cómo puedo rastrear mi pedido?||Una vez que tu pedido sea enviado, recibirás una actualización y podrás consultar el estado con soporte.\nPagos||¿Qué métodos de pago aceptan?||Actualmente aceptamos pagos contra entrega y seguimos ampliando opciones.\nDevoluciones||¿Puedo devolver un producto?||Sí, tienes hasta 30 días calendario desde la recepción del producto para solicitar una devolución.\nPedidos||¿Puedo modificar mi pedido después de confirmarlo?||Si tu pedido aún no ha sido procesado, podemos ayudarte a modificarlo.\nSeguridad||¿Es seguro comprar en Lux Nalvage?||Sí. Tu privacidad y seguridad son prioridad durante toda la experiencia."
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,25 @@
+{
+  "current": {
+    "sections": {},
+    "brand_tagline": "Diseño esencial. Selección curada.",
+    "brand_description": "Una tienda moderna, minimalista y confiable con estética premium.",
+    "trust_messages": "Envíos disponibles|Pago contra entrega|Compra segura|Atención al cliente|Proveedor verificado",
+    "contact_email": "hola@luxnalvage.com",
+    "contact_phone": "+57 300 123 4567",
+    "contact_whatsapp": "https://wa.me/573001234567",
+    "contact_address": "Bogotá, Colombia",
+    "contact_hours": "Lun - Vie: 9am - 6pm"
+  },
+  "presets": {
+    "default": {
+      "brand_tagline": "Diseño esencial. Selección curada.",
+      "brand_description": "Una tienda moderna, minimalista y confiable con estética premium.",
+      "trust_messages": "Envíos disponibles|Pago contra entrega|Compra segura|Atención al cliente|Proveedor verificado",
+      "contact_email": "hola@luxnalvage.com",
+      "contact_phone": "+57 300 123 4567",
+      "contact_whatsapp": "https://wa.me/573001234567",
+      "contact_address": "Bogotá, Colombia",
+      "contact_hours": "Lun - Vie: 9am - 6pm"
+    }
+  }
+}

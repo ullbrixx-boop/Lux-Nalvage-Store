@@ -1,0 +1,124 @@
+{% liquid
+  assign search_collection = collections['all']
+%}
+<header class="site-header" data-site-header {{ section.shopify_attributes }}>
+  <div class="container site-header__row">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <button class="icon-button header-toggle" type="button" aria-label="{{ 'sections.header.menu' | t }}" data-toggle-target="mobile-menu-panel">
+        {% render 'icon', icon: 'menu' %}
+      </button>
+      <a href="{{ routes.root_url }}" class="brand">
+        {% render 'brand-mark', logo: section.settings.logo %}
+        <span class="brand__name">{{ shop.name }}</span>
+      </a>
+    </div>
+
+    <nav class="site-nav" aria-label="Principal">
+      {% for link in section.settings.menu.links %}
+        <a href="{{ link.url }}" {% if link.current %}aria-current="page"{% endif %}>{{ link.title }}</a>
+      {% endfor %}
+      {% if section.settings.menu == blank %}
+        <a href="{{ routes.root_url }}">Inicio</a>
+        <a href="{{ routes.all_products_collection_url }}">Catálogo</a>
+        <a href="/collections/new">Nuevos</a>
+        <a href="/collections/featured">Destacados</a>
+        <a href="/pages/about">Sobre</a>
+        <a href="/pages/help">Ayuda</a>
+      {% endif %}
+    </nav>
+
+    <div class="header-actions">
+      <button class="icon-button" type="button" aria-label="{{ 'general.search.search' | t }}" data-toggle-target="search-panel">
+        {% render 'icon', icon: 'search' %}
+      </button>
+      <a class="icon-button" href="{{ routes.account_url }}" aria-label="{{ 'sections.header.account' | t }}">
+        {% render 'icon', icon: 'user' %}
+      </a>
+      <a class="icon-button" href="{{ routes.cart_url }}" aria-label="{{ 'sections.header.cart' | t }}">
+        <span style="position:relative;display:inline-flex;">
+          {% render 'icon', icon: 'cart' %}
+          {% if cart.item_count > 0 %}
+            <span class="cart-count">{{ cart.item_count }}</span>
+          {% endif %}
+        </span>
+      </a>
+    </div>
+  </div>
+
+  <div id="mobile-menu-panel" class="header-panel">
+    <div class="container" style="padding:16px 0 20px;">
+      <nav class="mobile-nav" aria-label="Móvil">
+        {% for link in section.settings.menu.links %}
+          <a href="{{ link.url }}" {% if link.current %}aria-current="page"{% endif %}>{{ link.title }}</a>
+        {% endfor %}
+        {% if section.settings.menu == blank %}
+          <a href="{{ routes.root_url }}">Inicio</a>
+          <a href="{{ routes.all_products_collection_url }}">Catálogo</a>
+          <a href="/collections/new">Nuevos</a>
+          <a href="/collections/featured">Destacados</a>
+          <a href="/pages/about">Sobre</a>
+          <a href="/pages/help">Ayuda</a>
+        {% endif %}
+      </nav>
+    </div>
+  </div>
+
+  <div id="search-panel" class="header-panel">
+    <div class="container search-panel">
+      {% if search_collection != blank and search_collection.products_count > 0 %}
+        <div class="grid-2" style="grid-template-columns:minmax(0,1fr) minmax(0,0.55fr);">
+          <div>
+            <form action="{{ routes.search_url }}" method="get" role="search">
+              <input class="field" type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}">
+            </form>
+            <div class="search-panel__results" style="margin-top:16px;">
+              {% for product in search_collection.products limit: 6 %}
+                <a href="{{ product.url }}" class="search-result-card card--soft">
+                  <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+                    <span style="font-weight:600;">{{ product.title }}</span>
+                    <span class="text-link" style="font-size:0.75rem;font-weight:700;">Ver →</span>
+                  </div>
+                </a>
+              {% endfor %}
+            </div>
+          </div>
+          <div>
+            <div class="eyebrow">Colecciones</div>
+            <div class="search-panel__results" style="margin-top:16px;">
+              {% for link in section.settings.menu.links limit: 6 %}
+                <a href="{{ link.url }}" class="search-result-card card--soft">
+                  <div style="font-weight:600;">{{ link.title }}</div>
+                  <div class="text-muted" style="margin-top:4px;font-size:0.9rem;">Explora esta sección de la tienda.</div>
+                </a>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      {% else %}
+        <div class="container--narrow">
+          <form action="{{ routes.search_url }}" method="get" role="search">
+            <input class="field" type="search" name="q" placeholder="{{ 'general.search.placeholder' | t }}">
+          </form>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menú principal"
+    }
+  ]
+}
+{% endschema %}

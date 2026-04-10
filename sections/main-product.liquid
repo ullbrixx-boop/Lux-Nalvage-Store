@@ -1,0 +1,140 @@
+{% liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign featured_image = current_variant.featured_image | default: product.featured_image
+%}
+<section class="section" {{ section.shopify_attributes }}>
+  <div class="container">
+    <div class="product-layout">
+      <div class="product-gallery" data-product-gallery>
+        <div class="product-gallery__main">
+          {% if featured_image != blank %}
+            <img src="{{ featured_image | image_url: width: 1600 }}" alt="{{ featured_image.alt | default: product.title | escape }}" loading="lazy" data-product-main-image>
+          {% elsif product.featured_image != blank %}
+            <img src="{{ product.featured_image | image_url: width: 1600 }}" alt="{{ product.title | escape }}" loading="lazy" data-product-main-image>
+          {% else %}
+            {{ 'product-1' | placeholder_svg_tag }}
+          {% endif %}
+        </div>
+        {% if product.images.size > 1 %}
+          <div class="product-gallery__thumbs">
+            {% for image in product.images %}
+              <button type="button" class="product-gallery__thumb{% if forloop.first %} is-active{% endif %}" data-product-thumb data-image="{{ image | image_url: width: 1600 }}" data-alt="{{ image.alt | default: product.title | escape }}">
+                <img src="{{ image | image_url: width: 220 }}" alt="{{ image.alt | default: product.title | escape }}" loading="lazy">
+              </button>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+
+      <div>
+        <div class="eyebrow">{{ shop.name }}</div>
+        <h1 class="heading-lg" style="margin-top:10px;">{{ product.title }}</h1>
+        {% if product.metafields.custom.subtitle != blank %}
+          <p class="text-muted" style="margin-top:14px;">{{ product.metafields.custom.subtitle }}</p>
+        {% endif %}
+
+        <div class="meta-row" style="justify-content:flex-start;gap:16px;margin-top:24px;">
+          <div class="product-meta__price">{{ current_variant.price | money }}</div>
+          {% if current_variant.compare_at_price > current_variant.price %}
+            <div class="text-strike">{{ current_variant.compare_at_price | money }}</div>
+          {% endif %}
+        </div>
+
+        {% if product.description != blank %}
+          <div class="prose" style="margin-top:24px;">{{ product.description }}</div>
+        {% endif %}
+
+        <div class="product-form__group">
+          {% form 'product', product %}
+            {% unless product.has_only_default_variant %}
+              <div>
+                <div class="eyebrow">Variante</div>
+                <select class="select" name="id" style="margin-top:12px;">
+                  {% for variant in product.variants %}
+                    <option value="{{ variant.id }}" {% if variant == current_variant %}selected{% endif %} {% unless variant.available %}disabled{% endunless %}>
+                      {{ variant.title }}{% unless variant.available %} · {{ 'products.product.sold_out' | t }}{% endunless %}
+                    </option>
+                  {% endfor %}
+                </select>
+              </div>
+            {% else %}
+              <input type="hidden" name="id" value="{{ current_variant.id }}">
+            {% endunless %}
+
+            <div class="product-form__group">
+              <div class="eyebrow">{{ 'products.product.quantity' | t }}</div>
+              <div class="quantity-selector" data-quantity style="margin-top:12px;">
+                <button type="button" data-quantity-decrease aria-label="Disminuir cantidad">−</button>
+                <input class="quantity-input" type="number" name="quantity" value="1" min="1">
+                <button type="button" data-quantity-increase aria-label="Aumentar cantidad">+</button>
+              </div>
+            </div>
+
+            <div style="margin-top:24px;display:grid;gap:12px;">
+              <button type="submit" class="button" {% unless current_variant.available %}disabled{% endunless %}>
+                {% if current_variant.available %}
+                  {{ 'products.product.add_to_cart' | t }}
+                {% else %}
+                  {{ 'products.product.sold_out' | t }}
+                {% endif %}
+              </button>
+              {% if section.settings.show_dynamic_checkout %}
+                {{ form | payment_button }}
+              {% endif %}
+            </div>
+          {% endform %}
+        </div>
+
+        <div class="card" style="margin-top:24px;padding:24px;background:rgba(241,236,231,0.7);box-shadow:none;">
+          <div class="product-benefits">
+            <div class="info-card">
+              <span class="value-grid__icon">{% render 'icon', icon: 'shield' %}</span>
+              <div>
+                <div style="font-weight:700;">Compra segura</div>
+                <div class="text-muted" style="margin-top:4px;">Confirmamos tu pedido y resolvemos tus dudas antes del envío.</div>
+              </div>
+            </div>
+            <div class="info-card">
+              <span class="value-grid__icon">{% render 'icon', icon: 'truck' %}</span>
+              <div>
+                <div style="font-weight:700;">Pago contra entrega</div>
+                <div class="text-muted" style="margin-top:4px;">Recibes y pagas. Sin fricción. Sin complicaciones.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {% assign related_collection = product.collections.first %}
+        {% if related_collection != blank and related_collection.products_count > 1 %}
+          <div style="margin-top:36px;">
+            <div class="eyebrow">Relacionados</div>
+            <div class="simple-grid" style="margin-top:16px;">
+              {% for related_product in related_collection.products limit: 4 %}
+                {% if related_product.id != product.id %}
+                  <a href="{{ related_product.url }}" class="card card--soft" style="padding:18px;">
+                    <div style="font-weight:700;">{{ related_product.title }}</div>
+                    <div class="text-muted" style="margin-top:4px;">{{ related_product.price | money }}</div>
+                  </a>
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main product",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_dynamic_checkout",
+      "label": "Mostrar botón dinámico de checkout",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

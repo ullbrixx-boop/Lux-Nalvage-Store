@@ -1,0 +1,11 @@
+<section class="page-hero">
+  <div class="container--narrow" style="text-align:center;">
+    {% if eyebrow != blank %}
+      <div class="eyebrow">{{ eyebrow }}</div>
+    {% endif %}
+    <h1 class="heading-lg" style="margin-top:14px;">{{ title }}</h1>
+    {% if text != blank %}
+      <p style="max-width:700px;margin:18px auto 0;">{{ text }}</p>
+    {% endif %}
+  </div>
+</section>

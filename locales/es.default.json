@@ -1,0 +1,32 @@
+{
+  "accessibility": {
+    "skip_to_text": "Saltar al contenido"
+  },
+  "general": {
+    "search": {
+      "search": "Buscar",
+      "submit": "Buscar",
+      "placeholder": "Buscar productos o colecciones"
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Agregar al carrito",
+      "sold_out": "Agotado",
+      "unavailable": "No disponible",
+      "quantity": "Cantidad"
+    }
+  },
+  "sections": {
+    "header": {
+      "menu": "Menú",
+      "account": "Cuenta",
+      "cart": "Carrito"
+    },
+    "cart": {
+      "title": "Tu selección",
+      "empty": "Tu carrito está vacío",
+      "continue_shopping": "Seguir comprando"
+    }
+  }
+}

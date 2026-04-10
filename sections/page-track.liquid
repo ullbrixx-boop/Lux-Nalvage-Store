@@ -1,0 +1,79 @@
+<section class="page-shell page-shell--light" data-track-demo {{ section.shopify_attributes }}>
+  <div class="container--narrow">
+    <div style="text-align:center;max-width:760px;margin:0 auto 40px;">
+      <div class="track-hero__icon value-grid__icon" style="margin:0 auto 16px;">{% render 'icon', icon: 'truck' %}</div>
+      <h1 class="heading-lg">Rastrear Pedido</h1>
+      <p class="text-muted" style="margin-top:14px;">Ingresa tu número de pedido y email para consultar el estado de tu envío.</p>
+    </div>
+
+    <div class="track-form">
+      <form class="simple-grid">
+        <div>
+          <label class="eyebrow" for="TrackingOrder">Número de pedido</label>
+          <input id="TrackingOrder" class="field" type="text" name="tracking_order" placeholder="Ej: ORD-ABC123XYZ">
+        </div>
+        <div>
+          <label class="eyebrow" for="TrackingEmail">Email</label>
+          <input id="TrackingEmail" class="field" type="email" name="tracking_email" placeholder="tu@email.com">
+        </div>
+        <button type="submit" class="button">Buscar pedido</button>
+      </form>
+    </div>
+
+    <div class="track-result hidden" data-track-result style="margin-top:32px;">
+      <div class="meta-row" style="align-items:center;">
+        <div>
+          <div class="eyebrow">Pedido</div>
+          <div class="heading-sm" data-track-order-number>ORD-DEMO123</div>
+        </div>
+        <div class="status-chip">
+          {% render 'icon', icon: 'clock' %}
+          Entrega estimada: 13-15 Abr 2026
+        </div>
+      </div>
+
+      <div class="timeline" style="margin-top:28px;">
+        <div class="timeline-card is-complete">
+          <div class="timeline-card__marker">{% render 'icon', icon: 'check-circle' %}</div>
+          <div class="timeline-card__title">Pedido confirmado</div>
+          <div class="text-muted">Sistema · 10 Abr 2026 · 14:30</div>
+        </div>
+        <div class="timeline-card is-complete">
+          <div class="timeline-card__marker">{% render 'icon', icon: 'check-circle' %}</div>
+          <div class="timeline-card__title">En preparación</div>
+          <div class="text-muted">Almacén central · 10 Abr 2026 · 16:45</div>
+        </div>
+        <div class="timeline-card is-current">
+          <div class="timeline-card__marker">{% render 'icon', icon: 'truck' %}</div>
+          <div class="timeline-card__title">Enviado</div>
+          <div class="text-muted">Centro de distribución · 11 Abr 2026 · 09:20</div>
+        </div>
+        <div class="timeline-card">
+          <div class="timeline-card__marker">{% render 'icon', icon: 'clock' %}</div>
+          <div class="timeline-card__title">En tránsito</div>
+          <div class="text-muted">En camino a destino · Pendiente</div>
+        </div>
+        <div class="timeline-card">
+          <div class="timeline-card__marker">{% render 'icon', icon: 'clock' %}</div>
+          <div class="timeline-card__title">Entregado</div>
+          <div class="text-muted">Dirección de entrega · Pendiente</div>
+        </div>
+      </div>
+
+      <div class="cta-band" style="margin-top:28px;text-align:center;">
+        <h2 class="heading-sm">¿Problemas con tu envío?</h2>
+        <p style="margin-top:10px;">Si tu pedido no ha llegado en la fecha estimada o tienes alguna duda, contáctanos.</p>
+        <div class="cta-actions" style="justify-content:center;">
+          <a class="button button--secondary" style="color:#fff;border-color:rgba(255,255,255,0.4);" href="/pages/contact">Contactar soporte</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Track page",
+  "settings": []
+}
+{% endschema %}

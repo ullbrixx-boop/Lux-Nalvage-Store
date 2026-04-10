@@ -1,0 +1,60 @@
+[
+  {
+    "name": "Tema",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon"
+      },
+      {
+        "type": "text",
+        "id": "brand_tagline",
+        "label": "Tagline de marca",
+        "default": "Diseño esencial. Selección curada."
+      },
+      {
+        "type": "textarea",
+        "id": "brand_description",
+        "label": "Descripción corta de marca",
+        "default": "Una tienda moderna, minimalista y confiable con estética premium."
+      },
+      {
+        "type": "text",
+        "id": "trust_messages",
+        "label": "Mensajes de confianza separados por |",
+        "default": "Envíos disponibles|Pago contra entrega|Compra segura|Atención al cliente|Proveedor verificado"
+      },
+      {
+        "type": "text",
+        "id": "contact_email",
+        "label": "Email de contacto",
+        "default": "hola@luxnalvage.com"
+      },
+      {
+        "type": "text",
+        "id": "contact_phone",
+        "label": "Teléfono de contacto",
+        "default": "+57 300 123 4567"
+      },
+      {
+        "type": "text",
+        "id": "contact_whatsapp",
+        "label": "URL de WhatsApp",
+        "default": "https://wa.me/573001234567"
+      },
+      {
+        "type": "text",
+        "id": "contact_address",
+        "label": "Dirección",
+        "default": "Bogotá, Colombia"
+      },
+      {
+        "type": "text",
+        "id": "contact_hours",
+        "label": "Horario",
+        "default": "Lun - Vie: 9am - 6pm"
+      }
+    ]
+  }
+]

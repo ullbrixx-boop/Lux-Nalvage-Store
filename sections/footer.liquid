@@ -1,0 +1,59 @@
+<footer class="footer" {{ section.shopify_attributes }}>
+  <div class="container footer__inner">
+    <div class="footer-columns">
+      <div>
+        <a href="{{ routes.root_url }}" class="brand">
+          {% render 'brand-mark', logo: section.settings.logo %}
+          <span class="brand__name">{{ shop.name }}</span>
+        </a>
+        <p class="text-muted" style="max-width:320px;margin-top:12px;">{{ settings.brand_description }}</p>
+      </div>
+
+      <div>
+        <div class="eyebrow">Tienda</div>
+        <div class="footer-links" style="margin-top:16px;display:grid;gap:10px;">
+          <a href="{{ routes.all_products_collection_url }}">Catálogo</a>
+          <a href="/collections/new">Nuevos</a>
+          <a href="/collections/featured">Destacados</a>
+        </div>
+      </div>
+
+      <div>
+        <div class="eyebrow">Soporte</div>
+        <div class="footer-links" style="margin-top:16px;display:grid;gap:10px;">
+          <a href="/pages/help">Ayuda / FAQ</a>
+          <a href="/pages/track">Seguimiento</a>
+          <a href="/pages/contact">Contacto</a>
+        </div>
+      </div>
+
+      <div>
+        <div class="eyebrow">Políticas</div>
+        <div class="footer-links" style="margin-top:16px;display:grid;gap:10px;">
+          <a href="/pages/politica-de-envios">Envíos</a>
+          <a href="/pages/cambios-y-devoluciones">Cambios y devoluciones</a>
+          <a href="/policies/privacy-policy">Privacidad</a>
+          <a href="/policies/terms-of-service">Términos</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <div>© {{ 'now' | date: '%Y' }} {{ shop.name }}. Todos los derechos reservados.</div>
+      <div>Pago contra entrega · Compra segura</div>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    }
+  ]
+}
+{% endschema %}

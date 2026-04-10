@@ -1,0 +1,16 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-home",
+      "settings": {
+        "hero_title": "Selección premium para una vida moderna.",
+        "hero_text": "Objetos esenciales, limpios y bien elegidos. Compra con confianza: pago contra entrega y confirmación rápida.",
+        "primary_label": "Comprar ahora",
+        "secondary_label": "Ver destacados"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

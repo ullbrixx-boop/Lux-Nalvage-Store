@@ -1,0 +1,241 @@
+{% liquid
+  assign featured_collection = section.settings.featured_collection
+  if featured_collection == blank
+    assign featured_collection = collections['featured']
+  endif
+  assign category_source = section.settings.category_collection_list
+  assign fallback_collection_handles = 'featured,new,all' | split: ','
+%}
+<section class="hero" {{ section.shopify_attributes }}>
+  <div class="container section" style="padding-top:56px;">
+    <div class="hero__grid">
+      <div class="hero__copy">
+        <div class="hero__tagline">{{ settings.brand_tagline }}</div>
+        <h1 class="heading-xl" style="margin-top:24px;">{{ section.settings.hero_title }}</h1>
+        <p>{{ section.settings.hero_text }}</p>
+        <div class="hero__actions">
+          <a class="button" href="{{ section.settings.primary_link | default: routes.all_products_collection_url }}">{{ section.settings.primary_label }}</a>
+          <a class="button button--secondary" href="{{ section.settings.secondary_link | default: '/collections/featured' }}">{{ section.settings.secondary_label }}</a>
+        </div>
+        <div class="hero__trust">
+          <div class="hero__trust-item">{% render 'icon', icon: 'truck' %}<span>Envío disponible</span></div>
+          <div class="hero__trust-item">{% render 'icon', icon: 'check-circle' %}<span>Pago contra entrega</span></div>
+          <div class="hero__trust-item">{% render 'icon', icon: 'shield' %}<span>Compra segura</span></div>
+          <div class="hero__trust-item">{% render 'icon', icon: 'message' %}<span>Soporte rápido</span></div>
+        </div>
+      </div>
+      <div class="hero__media" style="aspect-ratio:4 / 3;position:relative;">
+        {% if section.settings.hero_image != blank %}
+          {{ section.settings.hero_image | image_url: width: 1600 | image_tag: loading: 'lazy', alt: shop.name }}
+        {% else %}
+          <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1200&h=900&fit=crop" alt="{{ shop.name }}" loading="lazy">
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="feature-strip grid-3">
+      <div class="card card--soft" style="padding:28px;">
+        <h2 class="heading-sm">Pago contra entrega</h2>
+        <div class="text-muted" style="margin-top:8px;">Paga al recibir. Confirmamos tu compra y coordinamos la entrega.</div>
+      </div>
+      <div class="card card--soft" style="padding:28px;">
+        <h2 class="heading-sm">Selección curada</h2>
+        <div class="text-muted" style="margin-top:8px;">Menos ruido. Mejores opciones. Productos elegidos por diseño y utilidad.</div>
+      </div>
+      <div class="card card--soft" style="padding:28px;">
+        <h2 class="heading-sm">Soporte que responde</h2>
+        <div class="text-muted" style="margin-top:8px;">Te acompañamos antes y después de la compra con un trato claro.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--tight">
+  <div class="container">
+    <div class="section-intro">
+      <div>
+        <div class="eyebrow">Colecciones</div>
+        <h2 class="heading-md" style="margin-top:10px;">Explora por intención</h2>
+      </div>
+      <a class="text-link" href="{{ routes.all_products_collection_url }}" style="font-weight:700;">Ver todo →</a>
+    </div>
+    <div class="collection-grid" style="margin-top:32px;">
+      {% if category_source != blank %}
+        {% for collection in category_source limit: 3 %}
+          <a class="category-card" href="{{ collection.url }}">
+            <div class="category-card__media" style="aspect-ratio:4 / 4;position:relative;">
+              {% if collection.image != blank %}
+                {{ collection.image | image_url: width: 900 | image_tag: loading: 'lazy', alt: collection.title }}
+              {% else %}
+                <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=900&h=900&fit=crop" alt="{{ collection.title }}" loading="lazy">
+              {% endif %}
+            </div>
+            <div class="category-card__content" style="position:relative;margin-top:-112px;color:white;z-index:1;">
+              <div class="heading-sm" style="color:white;">{{ collection.title }}</div>
+              {% if collection.description != blank %}
+                <div style="margin-top:8px;color:rgba(255,255,255,0.82);">{{ collection.description | strip_html | truncate: 84 }}</div>
+              {% endif %}
+            </div>
+          </a>
+        {% endfor %}
+      {% else %}
+        {% for collection_handle in fallback_collection_handles limit: 3 %}
+          {% assign collection = collections[collection_handle] %}
+          {% if collection != blank %}
+            <a class="category-card" href="{{ collection.url }}">
+              <div class="category-card__media" style="aspect-ratio:4 / 4;position:relative;">
+                {% if collection.image != blank %}
+                  {{ collection.image | image_url: width: 900 | image_tag: loading: 'lazy', alt: collection.title }}
+                {% else %}
+                  <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=900&h=900&fit=crop" alt="{{ collection.title }}" loading="lazy">
+                {% endif %}
+              </div>
+              <div class="category-card__content" style="position:relative;margin-top:-112px;color:white;z-index:1;">
+                <div class="heading-sm" style="color:white;">{{ collection.title }}</div>
+                {% if collection.description != blank %}
+                  <div style="margin-top:8px;color:rgba(255,255,255,0.82);">{{ collection.description | strip_html | truncate: 84 }}</div>
+                {% endif %}
+              </div>
+            </a>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-intro">
+      <div>
+        <div class="eyebrow">Destacados</div>
+        <h2 class="heading-md" style="margin-top:10px;">Lo esencial, mejor elegido</h2>
+      </div>
+      <a class="text-link" href="{{ featured_collection.url | default: routes.all_products_collection_url }}" style="font-weight:700;">Ver destacados →</a>
+    </div>
+    <div class="product-grid" style="margin-top:32px;">
+      {% if featured_collection != blank and featured_collection.products_count > 0 %}
+        {% for product in featured_collection.products limit: 6 %}
+          {% render 'product-card', product: product %}
+        {% endfor %}
+      {% else %}
+        {% for product in collections['all'].products limit: 6 %}
+          {% render 'product-card', product: product %}
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="home-about">
+      <div class="card card--soft" style="padding:40px;">
+        <div class="eyebrow">Sobre {{ shop.name }}</div>
+        <h2 class="heading-md" style="margin-top:12px;">Una marca que se siente bien pensada.</h2>
+        <p class="text-muted" style="margin-top:16px;">Creemos en el minimalismo estratégico: productos claros, experiencia simple y comunicación honesta. Sin ruido. Sin exageraciones.</p>
+        <div style="margin-top:24px;">
+          <a class="button button--secondary" href="/pages/about">Conocer la marca</a>
+        </div>
+      </div>
+      <div class="card" style="padding:40px;background:var(--muted);box-shadow:none;">
+        <div class="eyebrow">Cómo funciona</div>
+        <h3 class="heading-sm" style="margin-top:12px;">Compra en 4 pasos</h3>
+        <div class="numbered-list" style="margin-top:24px;">
+          {% assign steps = 'Elige tu producto|Haz tu pedido online|Confirmamos tu compra|Recibes y pagas contra entrega' | split: '|' %}
+          {% for step in steps %}
+            <div class="numbered-item">
+              <span class="numbered-item__index">{{ forloop.index }}</span>
+              <div>
+                <div style="font-weight:700;">{{ step }}</div>
+                <div class="text-muted" style="margin-top:4px;">Simple, claro y sin fricción.</div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="cta-band">
+      <div style="max-width:720px;">
+        <div class="eyebrow">Listo para elegir mejor</div>
+        <h2 class="heading-lg" style="margin-top:12px;">Descubre tu próxima pieza esencial.</h2>
+        <p style="margin-top:16px;">Explora el catálogo completo y compra con pago contra entrega.</p>
+        <div class="cta-actions">
+          <a class="button button--light" href="{{ routes.all_products_collection_url }}">Ir al catálogo</a>
+          <a class="button button--secondary" style="color:#fff;border-color:rgba(255,255,255,0.4);" href="/pages/help">Ver preguntas frecuentes</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main home",
+  "settings": [
+    {
+      "type": "text",
+      "id": "hero_title",
+      "label": "Título principal",
+      "default": "Selección premium para una vida moderna."
+    },
+    {
+      "type": "textarea",
+      "id": "hero_text",
+      "label": "Texto principal",
+      "default": "Objetos esenciales, limpios y bien elegidos. Compra con confianza: pago contra entrega y confirmación rápida."
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Imagen hero"
+    },
+    {
+      "type": "text",
+      "id": "primary_label",
+      "label": "Texto botón principal",
+      "default": "Comprar ahora"
+    },
+    {
+      "type": "url",
+      "id": "primary_link",
+      "label": "Link botón principal"
+    },
+    {
+      "type": "text",
+      "id": "secondary_label",
+      "label": "Texto botón secundario",
+      "default": "Ver destacados"
+    },
+    {
+      "type": "url",
+      "id": "secondary_link",
+      "label": "Link botón secundario"
+    },
+    {
+      "type": "collection",
+      "id": "featured_collection",
+      "label": "Colección destacada"
+    },
+    {
+      "type": "collection_list",
+      "id": "category_collection_list",
+      "label": "Colecciones a mostrar"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Main home"
+    }
+  ]
+}
+{% endschema %}

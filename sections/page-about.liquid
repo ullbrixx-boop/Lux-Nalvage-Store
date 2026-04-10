@@ -1,0 +1,111 @@
+{% render 'page-hero', title: 'Sobre ' | append: shop.name, text: settings.brand_tagline, eyebrow: 'Nuestra marca' %}
+
+<section class="page-shell">
+  <div class="container">
+    <div class="about-story">
+      <div>
+        <h2 class="heading-md">Nuestra Historia</h2>
+        <div class="prose" style="margin-top:20px;max-width:680px;">
+          <p>{{ shop.name }} nació de una visión simple: hacer accesible el lujo a quienes valoran la calidad y el diseño. Comenzamos como un pequeño emprendimiento con una gran ambición: cambiar la forma en que las personas descubren y adquieren productos premium.</p>
+          <p>Hoy, nos hemos convertido en un destino de confianza para clientes que buscan lo mejor en tecnología, hogar, moda y estilo de vida. Cada producto en nuestro catálogo es cuidadosamente seleccionado para cumplir con nuestros estándares de calidad.</p>
+          <p>Nuestra filosofía es simple: ofrecer productos excepcionales, un servicio al cliente incomparable y una experiencia de compra sin igual.</p>
+        </div>
+      </div>
+      <div class="page-media" style="aspect-ratio:1 / 1;">
+        {% if section.settings.story_image != blank %}
+          {{ section.settings.story_image | image_url: width: 1200 | image_tag: loading: 'lazy', alt: shop.name }}
+        {% else %}
+          <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=800&fit=crop" alt="Equipo {{ shop.name }}" loading="lazy">
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="page-shell page-shell--light">
+  <div class="container">
+    <div style="text-align:center;max-width:760px;margin:0 auto 48px;">
+      <h2 class="heading-md">Nuestros Valores</h2>
+      <p class="text-muted" style="margin-top:14px;">Los principios que guían cada decisión y cada interacción con nuestros clientes.</p>
+    </div>
+    <div class="value-grid">
+      <div class="value-grid__item">
+        <span class="value-grid__icon">{% render 'icon', icon: 'package' %}</span>
+        <div>
+          <h3 class="heading-sm">Excelencia</h3>
+          <p class="text-muted" style="margin-top:8px;">Seleccionamos cada producto con altos estándares de calidad y diseño.</p>
+        </div>
+      </div>
+      <div class="value-grid__item">
+        <span class="value-grid__icon">{% render 'icon', icon: 'shield' %}</span>
+        <div>
+          <h3 class="heading-sm">Confianza</h3>
+          <p class="text-muted" style="margin-top:8px;">Tu seguridad y tranquilidad son prioridad en cada compra.</p>
+        </div>
+      </div>
+      <div class="value-grid__item">
+        <span class="value-grid__icon">{% render 'icon', icon: 'truck' %}</span>
+        <div>
+          <h3 class="heading-sm">Compromiso</h3>
+          <p class="text-muted" style="margin-top:8px;">Envíos rápidos y una atención clara en todo el proceso.</p>
+        </div>
+      </div>
+      <div class="value-grid__item">
+        <span class="value-grid__icon">{% render 'icon', icon: 'heart' %}</span>
+        <div>
+          <h3 class="heading-sm">Pasión</h3>
+          <p class="text-muted" style="margin-top:8px;">Amamos lo que hacemos y eso se refleja en cada detalle.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="stats-band section">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-grid__item" style="text-align:center;">
+        <div class="stat-grid__value">10K+</div>
+        <div class="stat-grid__label">Clientes satisfechos</div>
+      </div>
+      <div class="stat-grid__item" style="text-align:center;">
+        <div class="stat-grid__value">50K+</div>
+        <div class="stat-grid__label">Productos entregados</div>
+      </div>
+      <div class="stat-grid__item" style="text-align:center;">
+        <div class="stat-grid__value">99%</div>
+        <div class="stat-grid__label">Reviews positivas</div>
+      </div>
+      <div class="stat-grid__item" style="text-align:center;">
+        <div class="stat-grid__value">24h</div>
+        <div class="stat-grid__label">Soporte disponible</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="page-shell">
+  <div class="container--narrow">
+    <div class="article-card" style="text-align:center;padding:48px;">
+      <div class="value-grid__icon" style="margin:0 auto 20px;">{% render 'icon', icon: 'message' %}</div>
+      <h2 class="heading-md">Únete a nuestro equipo</h2>
+      <p class="text-muted" style="margin:16px auto 0;max-width:620px;">Siempre estamos buscando talento apasionado que comparta nuestra visión de excelencia. Si te interesa formar parte de {{ shop.name }}, nos encantaría conocerte.</p>
+      <div style="margin-top:24px;">
+        <a class="text-link" style="font-weight:700;" href="mailto:{{ settings.contact_email }}?subject=Oportunidades Laborales">Envía tu CV →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "About page",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "story_image",
+      "label": "Imagen de historia"
+    }
+  ]
+}
+{% endschema %}

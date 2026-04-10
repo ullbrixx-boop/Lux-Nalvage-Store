@@ -1,0 +1,72 @@
+<section class="section" {{ section.shopify_attributes }}>
+  <div class="container">
+    <div class="cart-header">
+      <div>
+        <div class="eyebrow">Carrito</div>
+        <h1 class="heading-lg" style="margin-top:10px;">Tu selección</h1>
+      </div>
+      <a href="{{ routes.all_products_collection_url }}" class="text-link" style="font-weight:700;">Seguir comprando →</a>
+    </div>
+
+    {% if cart.item_count == 0 %}
+      <div class="card card--soft" style="margin-top:40px;padding:40px;">
+        <div class="eyebrow">Carrito vacío</div>
+        <div class="heading-sm" style="margin-top:10px;">Aún no has agregado productos.</div>
+        <div style="margin-top:24px;">
+          <a href="{{ routes.all_products_collection_url }}" class="button">Ir al catálogo</a>
+        </div>
+      </div>
+    {% else %}
+      {% form 'cart', cart %}
+        <div class="cart-layout" style="margin-top:40px;">
+          <div class="simple-grid">
+            {% for item in cart.items %}
+              <div class="cart-line">
+                <div class="cart-line__grid">
+                  <a href="{{ item.url }}" class="cart-line__media">
+                    {% if item.image != blank %}
+                      {{ item.image | image_url: width: 240 | image_tag: loading: 'lazy', alt: item.product.title }}
+                    {% endif %}
+                  </a>
+                  <div>
+                    <div class="heading-sm">{{ item.product.title }}</div>
+                    <div class="text-muted" style="margin-top:6px;">{{ item.final_price | money }}</div>
+                    {% if item.variant.title != 'Default Title' %}
+                      <div class="text-muted" style="margin-top:4px;font-size:0.9rem;">{{ item.variant.title }}</div>
+                    {% endif %}
+                  </div>
+                  <div style="display:flex;align-items:center;gap:12px;justify-content:flex-end;">
+                    <input class="cart-qty" type="number" name="updates[]" min="0" value="{{ item.quantity }}" style="width:88px;">
+                    <a class="icon-button" href="{{ item.url_to_remove }}" aria-label="Eliminar">
+                      {% render 'icon', icon: 'alert' %}
+                    </a>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+
+          <aside class="order-summary">
+            <div class="eyebrow">Resumen</div>
+            <div class="summary-row" style="margin-top:18px;">
+              <span class="text-muted">Subtotal</span>
+              <strong>{{ cart.total_price | money }}</strong>
+            </div>
+            <div class="text-muted" style="margin-top:12px;">Pago contra entrega. Confirmamos tu pedido antes del envío.</div>
+            <div style="margin-top:24px;display:grid;gap:12px;">
+              <button class="button button--secondary" type="submit" name="update">Actualizar carrito</button>
+              <button class="button" type="submit" name="checkout">Continuar</button>
+            </div>
+          </aside>
+        </div>
+      {% endform %}
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main cart",
+  "settings": []
+}
+{% endschema %}

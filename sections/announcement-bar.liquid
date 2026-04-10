@@ -1,0 +1,17 @@
+{% liquid
+  assign messages = settings.trust_messages | default: 'Envíos disponibles|Pago contra entrega|Compra segura|Atención al cliente|Proveedor verificado' | split: '|'
+%}
+<div class="announcement-bar" {{ section.shopify_attributes }}>
+  <div class="container announcement-bar__inner">
+    {% for message in messages %}
+      <span class="announcement-bar__message{% if forloop.first %} is-active{% endif %}" data-announcement-message>{{ message | strip }}</span>
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Announcement bar",
+  "settings": []
+}
+{% endschema %}

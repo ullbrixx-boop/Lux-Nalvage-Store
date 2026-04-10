@@ -1,0 +1,41 @@
+<section class="section" {{ section.shopify_attributes }}>
+  <div class="container">
+    <div class="container--narrow" style="text-align:center;">
+      <div class="eyebrow">Buscar</div>
+      <h1 class="heading-lg" style="margin-top:10px;">Encuentra tu próxima pieza</h1>
+      <form action="{{ routes.search_url }}" method="get" role="search" style="margin-top:24px;">
+        <input class="field" type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}">
+      </form>
+    </div>
+
+    {% if search.performed %}
+      <div class="product-grid" style="margin-top:40px;">
+        {% for item in search.results %}
+          {% if item.object_type == 'product' %}
+            {% render 'product-card', product: item %}
+          {% else %}
+            <a href="{{ item.url }}" class="article-card">
+              <div class="eyebrow">{{ item.object_type | capitalize }}</div>
+              <h2 class="heading-sm" style="margin-top:8px;">{{ item.title }}</h2>
+              {% if item.content != blank %}
+                <div class="text-muted" style="margin-top:8px;">{{ item.content | strip_html | truncate: 120 }}</div>
+              {% endif %}
+            </a>
+          {% endif %}
+        {% else %}
+          <div class="card card--soft" style="padding:40px;grid-column:1 / -1;text-align:center;">
+            <div class="heading-sm">No encontramos resultados.</div>
+            <div class="text-muted" style="margin-top:8px;">Prueba con otro término o visita el catálogo completo.</div>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main search",
+  "settings": []
+}
+{% endschema %}

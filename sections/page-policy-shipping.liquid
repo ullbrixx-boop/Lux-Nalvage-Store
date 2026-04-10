@@ -1,0 +1,55 @@
+<section class="page-shell page-shell--light" {{ section.shopify_attributes }}>
+  <div class="container--narrow">
+    <div class="article-card">
+      <div style="text-align:center;">
+        <div class="value-grid__icon" style="margin:0 auto 16px;">{% render 'icon', icon: 'truck' %}</div>
+        <h1 class="heading-lg">Política de Envíos</h1>
+        <p class="text-muted" style="margin-top:10px;">Última actualización: Abril 2026</p>
+      </div>
+
+      <div class="simple-grid" style="margin-top:32px;">
+        <section>
+          <h2 class="heading-sm">Cobertura</h2>
+          <p class="text-muted" style="margin-top:10px;">Realizamos envíos a todo Colombia. Trabajamos con las principales transportadoras para garantizar la entrega segura y oportuna de tus productos.</p>
+        </section>
+        <section>
+          <h2 class="heading-sm">Tiempos de Entrega</h2>
+          <div class="table-list" style="margin-top:14px;">
+            <div class="table-list__row"><span>Ciudades principales</span><strong>2-3 días hábiles</strong></div>
+            <div class="table-list__row"><span>Otras ciudades</span><strong>3-5 días hábiles</strong></div>
+            <div class="table-list__row"><span>Zonas rurales</span><strong>5-7 días hábiles</strong></div>
+          </div>
+        </section>
+        <section>
+          <h2 class="heading-sm">Costos de Envío</h2>
+          <p class="text-muted" style="margin-top:10px;">Ofrecemos envío gratis en pedidos superiores a $150,000 COP. Para pedidos de menor valor, el costo de envío se calcula al checkout según la ubicación de entrega.</p>
+          <div class="policy-highlight" style="margin-top:14px;">
+            <span class="policy-highlight__icon">{% render 'icon', icon: 'package' %}</span>
+            <div><strong>Envío gratis</strong><div class="text-muted">En pedidos superiores a $150,000 COP</div></div>
+          </div>
+        </section>
+        <section>
+          <h2 class="heading-sm">Proceso de Envío</h2>
+          <div class="numbered-list" style="margin-top:14px;">
+            <div class="numbered-item"><span class="numbered-item__index">1</span><div>Recibes confirmación de tu pedido.</div></div>
+            <div class="numbered-item"><span class="numbered-item__index">2</span><div>Preparamos y empacamos tu pedido.</div></div>
+            <div class="numbered-item"><span class="numbered-item__index">3</span><div>Enviamos tu pedido y te compartimos novedades.</div></div>
+            <div class="numbered-item"><span class="numbered-item__index">4</span><div>Recibes tu pedido en la dirección indicada.</div></div>
+          </div>
+        </section>
+      </div>
+
+      <div class="cta-actions" style="justify-content:center;margin-top:32px;">
+        <a class="button button--secondary" href="/pages/track">Rastrear pedido</a>
+        <a class="button" href="/pages/contact">Contactar soporte</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Shipping policy page",
+  "settings": []
+}
+{% endschema %}

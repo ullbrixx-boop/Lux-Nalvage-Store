@@ -1,0 +1,8 @@
+{% assign brand_logo = logo | default: section.settings.logo %}
+{% if brand_logo != blank %}
+  {{ brand_logo | image_url: width: 120 | image_tag: loading: 'eager', class: 'brand__logo', alt: shop.name }}
+{% elsif 'logo-icon.png' != blank %}
+  <img src="{{ 'logo-icon.png' | asset_url }}" class="brand__logo" alt="{{ shop.name }}" loading="eager">
+{% else %}
+  <span class="brand__logo" style="display:inline-flex;align-items:center;justify-content:center;border-radius:999px;background:var(--accent-soft);color:var(--accent);font-weight:700;">L</span>
+{% endif %}

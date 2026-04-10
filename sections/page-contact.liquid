@@ -1,0 +1,92 @@
+<section class="page-shell page-shell--light" {{ section.shopify_attributes }}>
+  <div class="container">
+    <div style="text-align:center;max-width:760px;margin:0 auto 48px;">
+      <h1 class="heading-lg">Contáctanos</h1>
+      <p class="text-muted" style="margin-top:14px;">Estamos aquí para ayudarte. Envíanos un mensaje y te responderemos lo antes posible.</p>
+    </div>
+
+    <div class="contact-layout">
+      <div class="contact-panel">
+        {% form 'contact', class: 'simple-grid' %}
+          {% if form.posted_successfully? %}
+            <div class="notice-success">
+              <div class="value-grid__icon" style="margin:0 auto 16px;">{% render 'icon', icon: 'message' %}</div>
+              <h3 class="heading-sm">¡Mensaje enviado!</h3>
+              <p class="text-muted">Gracias por contactarnos. Te responderemos en menos de 24 horas.</p>
+            </div>
+          {% else %}
+            <div class="grid-2" style="gap:16px;">
+              <div>
+                <label for="ContactFormName" class="eyebrow">Nombre</label>
+                <input id="ContactFormName" class="field" type="text" name="contact[name]" value="{% if form.name %}{{ form.name }}{% endif %}">
+              </div>
+              <div>
+                <label for="ContactFormEmail" class="eyebrow">Email</label>
+                <input id="ContactFormEmail" class="field" type="email" name="contact[email]" value="{% if form.email %}{{ form.email }}{% endif %}">
+              </div>
+            </div>
+            <div>
+              <label for="ContactFormSubject" class="eyebrow">Asunto</label>
+              <input id="ContactFormSubject" class="field" type="text" name="contact[subject]">
+            </div>
+            <div>
+              <label for="ContactFormMessage" class="eyebrow">Mensaje</label>
+              <textarea id="ContactFormMessage" class="field" name="contact[body]" rows="6">{% if form.body %}{{ form.body }}{% endif %}</textarea>
+            </div>
+            <button type="submit" class="button">Enviar mensaje</button>
+          {% endif %}
+        {% endform %}
+      </div>
+
+      <div class="contact-cards">
+        <a href="mailto:{{ settings.contact_email }}" class="contact-card info-card">
+          <span class="contact-card__icon">{% render 'icon', icon: 'mail' %}</span>
+          <div>
+            <div class="eyebrow">Email</div>
+            <div style="font-weight:700;">{{ settings.contact_email }}</div>
+          </div>
+        </a>
+        <a href="tel:{{ settings.contact_phone | replace: ' ', '' }}" class="contact-card info-card">
+          <span class="contact-card__icon">{% render 'icon', icon: 'phone' %}</span>
+          <div>
+            <div class="eyebrow">Teléfono</div>
+            <div style="font-weight:700;">{{ settings.contact_phone }}</div>
+          </div>
+        </a>
+        <div class="contact-card info-card">
+          <span class="contact-card__icon">{% render 'icon', icon: 'map-pin' %}</span>
+          <div>
+            <div class="eyebrow">Ubicación</div>
+            <div style="font-weight:700;">{{ settings.contact_address }}</div>
+          </div>
+        </div>
+        <div class="contact-card info-card">
+          <span class="contact-card__icon">{% render 'icon', icon: 'clock' %}</span>
+          <div>
+            <div class="eyebrow">Horario</div>
+            <div style="font-weight:700;">{{ settings.contact_hours }}</div>
+          </div>
+        </div>
+        <div class="whatsapp-card">
+          <div class="info-card">
+            <span class="contact-card__icon" style="background:#22c55e;color:#fff;">{% render 'icon', icon: 'message' %}</span>
+            <div>
+              <h3 class="heading-sm">¿Prefieres WhatsApp?</h3>
+              <p class="text-muted" style="margin-top:8px;">Escríbenos directamente para una respuesta más rápida.</p>
+              <div style="margin-top:12px;">
+                <a href="{{ settings.contact_whatsapp }}" target="_blank" rel="noopener noreferrer" class="text-link" style="font-weight:700;color:#15803d;">Abrir WhatsApp →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Contact page",
+  "settings": []
+}
+{% endschema %}

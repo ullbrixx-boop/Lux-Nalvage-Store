@@ -1,0 +1,59 @@
+<section class="page-shell page-shell--light" {{ section.shopify_attributes }}>
+  <div class="container--narrow">
+    <div class="article-card">
+      <div style="text-align:center;">
+        <div class="value-grid__icon" style="margin:0 auto 16px;">{% render 'icon', icon: 'rotate' %}</div>
+        <h1 class="heading-lg">Cambios y Devoluciones</h1>
+        <p class="text-muted" style="margin-top:10px;">Última actualización: Abril 2026</p>
+      </div>
+
+      <div class="policy-highlight" style="margin-top:28px;">
+        <span class="policy-highlight__icon">{% render 'icon', icon: 'check-circle' %}</span>
+        <div>
+          <strong>Garantía de satisfacción 30 días</strong>
+          <div class="text-muted">Si no estás completamente satisfecho con tu compra, tienes 30 días para devolverla.</div>
+        </div>
+      </div>
+
+      <div class="simple-grid" style="margin-top:28px;">
+        <section>
+          <h2 class="heading-sm">Condiciones de devolución</h2>
+          <ul class="policy-list" style="margin-top:12px;padding-left:18px;">
+            <li>Estar sin usar y en perfecto estado.</li>
+            <li>Incluir empaque original completo.</li>
+            <li>Todos los accesorios y manuales incluidos.</li>
+            <li>Comprobante de compra disponible.</li>
+          </ul>
+        </section>
+        <section>
+          <h2 class="heading-sm">No aplicable para</h2>
+          <ul class="policy-list" style="margin-top:12px;padding-left:18px;">
+            <li>Productos usados o dañados por el cliente.</li>
+            <li>Productos sin empaque original.</li>
+            <li>Productos personalizados o venta final.</li>
+          </ul>
+        </section>
+        <section>
+          <h2 class="heading-sm">Proceso</h2>
+          <div class="numbered-list" style="margin-top:14px;">
+            <div class="numbered-item"><span class="numbered-item__index">1</span><div>Contacta a soporte con tu número de pedido.</div></div>
+            <div class="numbered-item"><span class="numbered-item__index">2</span><div>Recibe instrucciones para la devolución.</div></div>
+            <div class="numbered-item"><span class="numbered-item__index">3</span><div>Empaqueta el producto y coordina recolección.</div></div>
+            <div class="numbered-item"><span class="numbered-item__index">4</span><div>Procesamos tu reembolso tras la validación.</div></div>
+          </div>
+        </section>
+      </div>
+
+      <div class="cta-actions" style="justify-content:center;margin-top:32px;">
+        <a class="button" href="/pages/contact">Contactar soporte</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Returns policy page",
+  "settings": []
+}
+{% endschema %}
