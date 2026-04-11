@@ -3,7 +3,7 @@
 %}
 <header class="site-header" data-site-header {{ section.shopify_attributes }}>
   <div class="container site-header__row">
-    <div style="display:flex;align-items:center;gap:12px;">
+    <div class="site-header__brand-group" style="display:flex;align-items:center;gap:12px;">
       <button class="icon-button header-toggle" type="button" aria-label="{{ 'sections.header.menu' | t }}" data-toggle-target="mobile-menu-panel">
         {% render 'icon', icon: 'menu' %}
       </button>
@@ -15,15 +15,15 @@
 
     <nav class="site-nav" aria-label="Principal">
       {% for link in section.settings.menu.links %}
-        <a href="{{ link.url }}" {% if link.current %}aria-current="page"{% endif %}>{{ link.title }}</a>
+        <a class="site-nav__link" href="{{ link.url }}" {% if link.current %}aria-current="page"{% endif %}>{{ link.title }}</a>
       {% endfor %}
       {% if section.settings.menu == blank %}
-        <a href="{{ routes.root_url }}">Inicio</a>
-        <a href="{{ routes.all_products_collection_url }}">Catálogo</a>
-        <a href="/collections/new">Nuevos</a>
-        <a href="/collections/featured">Destacados</a>
-        <a href="/pages/about">Sobre</a>
-        <a href="/pages/help">Ayuda</a>
+        <a class="site-nav__link" href="{{ routes.root_url }}">Inicio</a>
+        <a class="site-nav__link" href="{{ routes.all_products_collection_url }}">Catálogo</a>
+        <a class="site-nav__link" href="{{ routes.collections_url }}/new">Nuevos</a>
+        <a class="site-nav__link" href="{{ routes.collections_url }}/featured">Destacados</a>
+        <a class="site-nav__link" href="/pages/about">Sobre</a>
+        <a class="site-nav__link" href="/pages/help">Ayuda</a>
       {% endif %}
     </nav>
 
@@ -54,8 +54,8 @@
         {% if section.settings.menu == blank %}
           <a href="{{ routes.root_url }}">Inicio</a>
           <a href="{{ routes.all_products_collection_url }}">Catálogo</a>
-          <a href="/collections/new">Nuevos</a>
-          <a href="/collections/featured">Destacados</a>
+          <a href="{{ routes.collections_url }}/new">Nuevos</a>
+          <a href="{{ routes.collections_url }}/featured">Destacados</a>
           <a href="/pages/about">Sobre</a>
           <a href="/pages/help">Ayuda</a>
         {% endif %}

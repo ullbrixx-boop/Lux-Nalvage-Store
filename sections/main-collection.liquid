@@ -1,7 +1,7 @@
 <section class="section" {{ section.shopify_attributes }}>
   <div class="container">
     <div class="collection-hero">
-      <div>
+      <div class="collection-hero__copy">
         <div class="eyebrow">Colección</div>
         <h1 class="heading-lg" style="margin-top:10px;">{{ collection.title }}</h1>
         {% if collection.description != blank %}
@@ -11,17 +11,17 @@
           <a href="{{ routes.all_products_collection_url }}" class="text-link" style="font-weight:700;">Ver todo el catálogo →</a>
         </div>
       </div>
-      <div class="collection-media" style="aspect-ratio:4 / 3;">
+      <div class="collection-media collection-hero__media" style="aspect-ratio:4 / 3;">
         {% if collection.image != blank %}
           {{ collection.image | image_url: width: 1400 | image_tag: loading: 'lazy', alt: collection.title }}
         {% else %}
-          <img src="https://images.unsplash.com/photo-1491637639811-60e2756cc1c7?w=1400&h=1000&fit=crop" alt="{{ collection.title }}" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1491637639811-60e2756cc1c7?w=1400&h=1000&fit=crop" alt="{{ collection.title }}" loading="lazy" width="1400" height="1000">
         {% endif %}
       </div>
     </div>
 
     {% paginate collection.products by 12 %}
-      <div class="collection-grid" style="margin-top:48px;">
+      <div class="collection-grid collection-grid--catalog" style="margin-top:48px;">
         {% for product in collection.products %}
           {% render 'product-card', product: product %}
         {% else %}
@@ -33,7 +33,7 @@
       </div>
 
       {% if paginate.pages > 1 %}
-        <div style="margin-top:32px;display:flex;justify-content:center;gap:12px;flex-wrap:wrap;">
+        <div class="pagination-row" style="margin-top:32px;display:flex;justify-content:center;gap:12px;flex-wrap:wrap;">
           {% if paginate.previous %}
             <a class="button button--secondary" href="{{ paginate.previous.url }}">Anterior</a>
           {% endif %}

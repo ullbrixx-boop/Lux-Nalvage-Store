@@ -3,9 +3,9 @@
     "main": {
       "type": "main-home",
       "settings": {
-        "hero_title": "Selección premium para una vida moderna.",
-        "hero_text": "Objetos esenciales, limpios y bien elegidos. Compra con confianza: pago contra entrega y confirmación rápida.",
-        "primary_label": "Comprar ahora",
+        "hero_title": "Primero la confianza. Después, la magia.",
+        "hero_text": "Una experiencia limpia, premium y confiable para descubrir piezas bien elegidas sin ruido, sin fricción y sin sensación de tienda genérica.",
+        "primary_label": "Explorar catálogo",
         "secondary_label": "Ver destacados"
       }
     }
