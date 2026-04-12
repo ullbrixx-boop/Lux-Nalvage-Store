@@ -44,7 +44,8 @@
         "company_label": "RUT (Garantía del producto)",
         "optional_company_label": "RUT (Garantía del producto)",
         "address2_label": "Casa o Departamento (Ej: dpto 111)",
-        "optional_address2_label": "Casa o Departamento (Ej: dpto 111)"
+        "optional_address2_label": "Casa o Departamento (Ej: dpto 111)",
+        "city_label": "Comuna"
       }
     }
   }
