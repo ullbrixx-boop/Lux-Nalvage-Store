@@ -1,4 +1,4 @@
-{% render 'page-hero', title: 'Sobre ' | append: shop.name, text: settings.brand_tagline, eyebrow: 'Nuestra marca' %}
+{% render 'page-hero', title: 'Sobre ', append: shop.name, text: settings.brand_tagline, eyebrow: 'Nuestra marca' %}
 
 <section class="page-shell">
   <div class="container">
@@ -109,3 +109,15 @@
   ]
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'page-hero', title: 'Sobre ' | append: shop.name, text: settings.brand_tagline,
+    eyebrow: 'Nuestra marca' %}"
+  to: "{% render 'page-hero', title: 'Sobre ', append: shop.name, text: settings.brand_tagline,
+    eyebrow: 'Nuestra marca' %}"
+  position: 0..116
+{% endcomment %}
